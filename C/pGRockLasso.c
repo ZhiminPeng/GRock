@@ -9,11 +9,13 @@
  * Compile: make
  * run code: mpiexec -n 1 ./lasso $dataDirectory$
  *
- * Author:   Zhimin Peng @ CAAM, Rice University
+ * Copyright (c)     Zhimin Peng @ Math, UCLA
  * Created Date:     01/11/2013
  * Modified Date:    05/02/2013
+ *                   05/02/2014, 
+ *                   add dynamic update P, 
+ *                   fixed some bugs
  * --------------------------------------------------------*/
-
 
 #include <stdio.h>
 #include <stdlib.h>
