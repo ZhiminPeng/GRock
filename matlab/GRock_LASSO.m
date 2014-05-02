@@ -51,6 +51,7 @@ hist.obj_err = zeros(maxIter, 1); % initialize history objective values
 hist.rel_err = zeros(maxIter, 1); % initialize history relative error
 hist.time    = zeros(maxIter, 1); % initialize computation time
 hist.epoch   = zeros(maxIter, 1);
+hist.P       = zeros(maxIter, 1);
 opt_obj      = lambda*norm(xs,1)+0.5*norm(A*xs - b)^2; % optimal obj
 nrm_xs       = norm(xs); % ||xs||_2
 if(nrm_xs==0)
@@ -114,11 +115,17 @@ for iter = 1:maxIter
     t_end = toc(t_start);
     
     %% history record
-    hist.time(iter) = t_end;
+    hist.time(iter)    = t_end;
     hist.obj_err(iter) = obj_new - opt_obj;
     hist.rel_err(iter) = norm(x - xs)/nrm_xs;
-    hist.epoch(iter) = iter;
+    hist.epoch(iter)   = iter;
+    hist.P(iter)       = length(upd_idx);
 end
+hist.time    = hist.time(1:iter);
+hist.obj_err = hist.obj_err(1:iter);
+hist.rel_err = hist.rel_err(1:iter);
+hist.epoch   = hist.epoch(1:iter);
+hist.P   = hist.P(1:iter);
 
 %% nested functions
     function [maxIter, obj_tol, rel_tol, print, xs, P, sigma, mode] = get_opts
